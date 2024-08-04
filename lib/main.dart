@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'dart:convert';
 
 void main() {
@@ -37,7 +39,7 @@ class _MathSolverScreenState extends State<MathSolverScreen> {
   final PageController _pageController = PageController();
   bool _showMathKeyboard = false;
 
-  final String apiKey = ''; // Replace with your actual API key
+  final String apiKey = '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'; // Replace with your actual API key
 
   @override
   void initState() {
@@ -97,14 +99,14 @@ class _MathSolverScreenState extends State<MathSolverScreen> {
       "messages": [
         {
           "role": "system",
-          "content": "You are a helpful assistant designed to solve math and education problems. When provided with a math question, solve it step by step. Divide your response into JSON objects, where each object represents a page of content that fits a mobile screen. Each page should include a description and calculations in plain text, as well as a separate LaTeX formatted math expression. Here's an example format:\n\n{\n  \"pages\": [\n    {\n      \"page\": 1,\n      \"explanation\": \"Step 1: Description and calculations for the first step.\",\n      \"math\": \"LaTeX formatted math expression\"\n    },\n    {\n      \"page\": 2,\n      \"explanation\": \"Step 2: Description and calculations for the second step.\",\n      \"math\": \"LaTeX formatted math expression\"\n    },\n    ...,\n    {\n      \"page\": n,\n      \"explanation\": \"Final Solution: The final answer with explanation.\",\n      \"math\": \"LaTeX formatted final answer\"\n    }\n  ]\n}\n"
+          "content": "You are a helpful assistant designed to solve math and education problems. When provided with a math question, solve it step by step. Divide your response into JSON objects, where each object represents a page of content that fits a mobile screen. Each page should include a description and calculations in plain text, as well as a separate LaTeX formatted math expression. If the problem involves geometry, provide an SVG representation of the diagram. If the problem involves a graph, provide graph data points or functions. Here's an example format:\n\n{\n  \"pages\": [\n    {\n      \"page\": 1,\n      \"explanation\": \"Step 1: Description and calculations for the first step.\",\n      \"math\": \"LaTeX formatted math expression\",\n      \"geometry\": \"Optional SVG data for geometry problems\",\n      \"graph\": {\"type\": \"line\", \"data\": [{\"x\": 1, \"y\": 2}, {\"x\": 2, \"y\": 3}, ...]}\n    },\n    ...,\n    {\n      \"page\": n,\n      \"explanation\": \"Final Solution: The final answer with explanation.\",\n      \"math\": \"LaTeX formatted final answer\",\n      \"geometry\": \"Optional SVG data for geometry problems\",\n      \"graph\": {\"type\": \"line\", \"data\": [{\"x\": 1, \"y\": 2}, {\"x\": 2, \"y\": 3}, ...]}\n    }\n  ]\n}\n"
         },
         {
           "role": "user",
           "content": "Solve the following math and education problem and format the response as described above.\n\nMath Problem: $problem"
         }
       ],
-      "response_format": {"type":"json_object"},
+       "response_format": {"type":"json_object"},
       "max_tokens": 1000,
       "temperature": 0.7,
       "top_p": 1.0,
@@ -251,6 +253,47 @@ class _MathSolverScreenState extends State<MathSolverScreen> {
                                                               ),
                                                             );
                                                           },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                    if (_pages[index]['geometry'] != null && _pages[index]['geometry'].isNotEmpty) ...[
+                                                      SizedBox(height: 10),
+                                                      SvgPicture.string(
+                                                        _pages[index]['geometry'],
+                                                        width: 300,
+                                                        height: 300,
+                                                      ),
+                                                    ],
+                                                    if (_pages[index]['graph'] != null && _pages[index]['graph']['data'] != null) ...[
+                                                      SizedBox(height: 10),
+                                                      Container(
+                                                        height: 300,
+                                                        child: LineChart(
+                                                          LineChartData(
+                                                            lineBarsData: [
+                                                              LineChartBarData(
+                                                                spots: _pages[index]['graph']['data']
+                                                                    .map<FlSpot>((point) => FlSpot(point['x'].toDouble(), point['y'].toDouble()))
+                                                                    .toList(),
+                                                                isCurved: true,
+                                                                
+                                                                // colors: [Colors.blue],
+                                                                barWidth: 4,
+                                                                isStrokeCapRound: true,
+                                                                dotData: FlDotData(show: false),
+                                                              ),
+                                                            ],
+                                                            titlesData: FlTitlesData(
+                                                              leftTitles: AxisTitles(
+                                                                sideTitles: SideTitles(showTitles: true),
+                                                              ),
+                                                              bottomTitles: AxisTitles(
+                                                                sideTitles: SideTitles(showTitles: true),
+                                                              ),
+                                                            ),
+                                                            borderData: FlBorderData(show: true),
+                                                            gridData: FlGridData(show: true),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
