@@ -1,17 +1,1 @@
-{
-  "hosting": {
-    "site": "aiteacher24",
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
+{"hosting":{"site":"aiteacher24","public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"aiteacher-61ce9","appId":"1:703889385243:android:aef810c33629b0256c95be","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"aiteacher-61ce9","appId":"1:703889385243:ios:fa54fd02f698008b6c95be","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"aiteacher-61ce9","appId":"1:703889385243:ios:fa54fd02f698008b6c95be","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"aiteacher-61ce9","configurations":{"android":"1:703889385243:android:aef810c33629b0256c95be","ios":"1:703889385243:ios:fa54fd02f698008b6c95be","macos":"1:703889385243:ios:fa54fd02f698008b6c95be","web":"1:703889385243:web:3f48de4714b74f596c95be","windows":"1:703889385243:web:bccb90a23cba07bb6c95be"}}}}}}

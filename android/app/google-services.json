@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "703889385243",
+    "project_id": "aiteacher-61ce9",
+    "storage_bucket": "aiteacher-61ce9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703889385243:android:aef810c33629b0256c95be",
+        "android_client_info": {
+          "package_name": "com.example.smathmathai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703889385243-e6dkck47mi9mtt2od7ed4uak4vlli8o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqOWPCPnwPO_O7HxW4UxYwR8QdGdIjBwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703889385243-e6dkck47mi9mtt2od7ed4uak4vlli8o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
