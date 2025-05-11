@@ -39,7 +39,6 @@ class _MathSolverScreenState extends State<MathSolverScreen> {
   final PageController _pageController = PageController();
   bool _showMathKeyboard = false;
 
-  final String apiKey = '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'; // Replace with your actual API key
 
   @override
   void initState() {
